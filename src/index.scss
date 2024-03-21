@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+@font-face {
+  font-family: arabicFontBold;
+  src: url(./assets/fonts/ArbFONTS-Bold.ttf);
+}
+@font-face {
+  font-family: arabicFontMedium;
+  src: url(./assets/fonts/ArbFONTS-Medium.ttf);
+}
+@font-face {
+  font-family: arabicFontRegular;
+  src: url(./assets/fonts/ArbFONTS-Regular.ttf);
+}
+@font-face {
+  font-family: arabicFontLight;
+  src: url(./assets/fonts/ArbFONTS-LIGHT.ttf);
+}
+.arabicFontBold {
+  font-family: arabicFontBold;
+}
+.arabicFontMedium {
+  font-family: arabicFontMedium;
+}
+.arabicFontRegular {
+  font-family: arabicFontRegular;
+}
+.arabicFontLight {
+  font-family: arabicFontLight;
+}
+body {
+  background-color: red;
+  height: 50000px;
+  font-family: arabicFontMedium;
+}
+::selection {
+  /* Change highlight background color to black */
+  background: #ff4119;
+  /* Change highlight text color to red */
+  color: #fff;
+}
+
+.animate-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+}
+.progress_wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+.progress_bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: #ff4119;
+}
