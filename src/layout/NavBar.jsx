@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import {Link} from 'react-router-dom';
 
 const NavBar = () => {
   let nav = useRef();
@@ -39,12 +40,24 @@ const NavBar = () => {
             alt="Flowbite Logo"
           />
         </a>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
           <button
+            to="/login"
             type="button"
-            className="text-white bg-green-700 hover:bg-green-800 duration-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+            className="text-white bg-green-700 hover:bg-green-800 duration-300 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
           >
-            تسجيل الدخول
+           <Link to="/login">
+              تسجيل الدخول  
+            </Link>
+          </button>
+          <button
+            to="/signUp"
+            type="button"
+            className="bg-transparent hover:bg-green-700 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded-lg text-sm text-center"
+          >
+            <Link to="/signup">
+               إنشاء حساب
+            </Link>
           </button>
           <button
             data-collapse-toggle="navbar-cta"

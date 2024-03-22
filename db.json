@@ -1,0 +1,33 @@
+{
+  "users": [
+    {
+      "id": "40de",
+      "username": "gusasityty",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "3f5e",
+      "username": "cabikan",
+      "password": "Pa$$w0rd!"
+    },
+    {
+      "id": "61a2",
+      "username": "narehom",
+      "password": "Pa$$w0rd!"
+    }
+  ],
+  "projects": [
+    {
+      "id": "92a1",
+      "name_ar": "Claire Sullivan",
+      "name_en": "Marny Lane",
+      "details_ar": "Dolor tenetur nobis ",
+      "details_en": "Cupiditate quia corr",
+      "type_project": "بناء دار أيتام",
+      "completion_date": "1990-05-04",
+      "target_amount": "14",
+      "remaining_amount": "64",
+      "project_image": null
+    }
+  ]
+}
