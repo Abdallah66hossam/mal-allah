@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   let nav = useRef();
@@ -25,13 +25,13 @@ const NavBar = () => {
     };
   }, []);
   return (
-    <nav className="bg-white border-gray-200" ref={nav}>
+    <nav className="bg-white border-gray-200 z-[9999] relative" ref={nav}>
       <div className="progress_wrapper">
         <div className="progress_bar" id="bar"></div>
       </div>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a
-          href="https://flowbite.com/"
+        <Link
+          to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
         >
           <img
@@ -39,26 +39,24 @@ const NavBar = () => {
             className="w-[140px] object-contain rounded-xl absolute top-3"
             alt="Flowbite Logo"
           />
-        </a>
+        </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
-          <button
-            to="/login"
-            type="button"
-            className="text-white bg-green-700 hover:bg-green-800 duration-300 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
-          >
-           <Link to="/login">
-              تسجيل الدخول  
-            </Link>
-          </button>
-          <button
-            to="/signUp"
-            type="button"
-            className="bg-transparent hover:bg-green-700 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded-lg text-sm text-center"
-          >
-            <Link to="/signup">
-               إنشاء حساب
-            </Link>
-          </button>
+          <Link to="/login">
+            <button
+              type="button"
+              className="text-white bg-green-700 hover:bg-green-800 duration-300 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
+            >
+              تسجيل الدخول
+            </button>
+          </Link>
+          <Link to="/signup">
+            <button
+              type="button"
+              className="bg-transparent hover:bg-green-700 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded-lg text-sm text-center"
+            >
+              إنشاء حساب
+            </button>
+          </Link>
           <button
             data-collapse-toggle="navbar-cta"
             type="button"
