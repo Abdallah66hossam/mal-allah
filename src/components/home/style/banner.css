@@ -1,0 +1,114 @@
+.home .swiper-slide {
+  height: 600px;
+  color: #fff;
+  transition: 0.5s all;
+  padding-top: 150px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.home .swiper-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+/* button style */
+.home .swiper-pagination-bullet {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: auto;
+  margin: 0 10px;
+  background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.home .swiper-pagination-bullet span {
+  border: 2px solid #dcdcdc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: -1;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.32px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.home .swiper-button-prev,
+.home .swiper-button-next {
+  color: #f8d3cc !important;
+  margin: 10px 0 !important;
+  border-radius: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  z-index: 100;
+}
+.home .swiper-button-prev {
+  background-image: url("/src/assets/images/left-arrow.svg");
+  width: 45px !important;
+  height: 45px !important;
+  background-color: #00000050;
+}
+.home .swiper-button-next {
+  background-image: url("/src/assets/images/right-arrow.svg");
+  width: 45px !important;
+  height: 45px !important;
+  background-color: #00000050;
+}
+.home .swiper-rtl .swiper-button-prev {
+  background-image: url("/src/assets/images/right-arrow.svg");
+}
+.home .swiper-rtl .swiper-button-next {
+  background-image: url("/src/assets/images/left-arrow.svg");
+}
+
+.home .swiper-button-next::after,
+.home .swiper-button-prev::after {
+  content: "";
+}
+.home .swiper-rtl .swiper-button-prev::after,
+.home .swiper-rtl .swiper-button-next::after {
+  content: "";
+}
+/* button circle */
+.progress {
+  transform: rotate(-90deg);
+}
+.circle-origin {
+  fill: transparent;
+  stroke: #16a34a;
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-dasharray: 170.664px;
+  stroke-dashoffset: 170.664px;
+}
+
+.home .swiper-pagination-bullet-active .circle-origin {
+  animation: progress 10s;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dashoffset: 170.664px;
+  }
+
+  90% {
+    stroke-dashoffset: 0;
+  }
+
+  100% {
+    stroke-dashoffset: -170.664px;
+  }
+}
