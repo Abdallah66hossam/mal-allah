@@ -1,7 +1,21 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAlert } from "../../context/AlertContext";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/");
+    }
+
+    axios.get()
+  }, [navigate]);
+
+  const { showAlert } = useAlert();
   const [formData, setFormData] = useState({
     name_ar: "",
     name_en: "",
@@ -33,7 +47,8 @@ const Register = () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
-        throw new Error("Authentication token not found");
+        showAlert("Authentication token not found", "red");
+        return
       }
 
       const headers = {
@@ -47,14 +62,15 @@ const Register = () => {
       }
 
       const response = await axios.post(
-        "https://donate-app-n7oe.onrender.com/api/v1/user/projects",
+        "https://donate-app-n7oe.onrender.com/api/v1/user/projects?locale=ar",
         data,
         { headers }
       );
 
-      console.log("Project created successfully", response);
+      showAlert(response.data.message, "teal");
+      navigate("/");
     } catch (error) {
-      console.error("Error creating project:", error);
+      showAlert(error.response.data.error, "red");
     }
   };
 
@@ -134,14 +150,14 @@ const Register = () => {
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900"></label>
               <select
-                name="type_project"
-                value={formData.type_project}
+                name="project_type_id"
+                value={formData.project_type_id}
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
               >
                 <option selected>نوعية المشروع</option>
-                <option value="بناء دار أيتام">بناء دار أيتام</option>
-                <option value="بناء مسجد">بناء مسجد</option>
+                <option value="1">بناء دار أيتام</option>
+                <option value="2">بناء مسجد</option>
               </select>
             </div>
 
