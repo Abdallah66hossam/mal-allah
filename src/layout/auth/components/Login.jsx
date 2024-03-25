@@ -1,6 +1,19 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Alert from "../../Alert";
+
 const Login = () => {
+  const navigate = useNavigate();
+  const [alert, setAlert] = useState({});
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
@@ -10,19 +23,40 @@ const Login = () => {
     if (!email || !password) return;
 
     try {
-      await axios.post("http://localhost:3001/users", {
-        email,
-        password,
-      });
+      const response = await axios.post("https://donate-app-n7oe.onrender.com/login", formData);
 
-      console.log("Login successful");
+      const { token } = response.data.data;
+      console.log(token);
+      localStorage.setItem("token", token); 
+      setAlert({ message: response.data.message, type: "success" });
+
+      if(token){
+        axios.interceptors.request.use((config) => {
+          config.headers["Authorization"] = `${token}`;
+          return config;
+        });
+      }
+      
+      navigate("/");
     } catch (error) {
-      console.error("Error registering user:", error);
+      setAlert({ message: "Error registering user", type: "error" });
     }
   };
 
+  const handleCloseAlert = () => {
+    setAlert(null);
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+       {alert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={handleCloseAlert}
+        />
+      )}
+      <form onSubmit={handleSubmit}>
       <div className="flex flex-col items-center justify-center h-screen px-6 py-8 mx-auto lg:py-0">
         <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -96,6 +130,8 @@ const Login = () => {
         </div>
       </div>
     </form>
+    </>
+
   );
 };
 

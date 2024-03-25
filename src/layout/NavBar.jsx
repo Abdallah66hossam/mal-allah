@@ -24,6 +24,9 @@ const NavBar = () => {
       window.removeEventListener("scroll", onScroll);
     };
   }, []);
+
+  const isLoggedIn = localStorage.getItem("token");
+
   return (
     <nav className="bg-white border-gray-200 z-[9999] relative" ref={nav}>
       <div className="progress_wrapper">
@@ -36,27 +39,42 @@ const NavBar = () => {
         >
           <img
             src="/logo.jpg"
-            className="w-[140px] object-contain rounded-xl absolute top-3"
+            className="h-[80px] object-contain rounded-xl absolute top-3"
             alt="Flowbite Logo"
           />
         </Link>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
-          <Link to="/login">
+          {isLoggedIn ? (
             <button
+              onClick={() => {
+                localStorage.removeItem("token");
+                window.location.reload(); 
+              }}
               type="button"
-              className="text-white bg-green-700 hover:bg-green-800 duration-300 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
+              className="text-white bg-red-700 hover:bg-red-800 duration-300 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
             >
-              تسجيل الدخول
+              تسجيل الخروج
             </button>
-          </Link>
-          <Link to="/signup">
-            <button
-              type="button"
-              className="bg-transparent hover:bg-green-700 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded-lg text-sm text-center"
-            >
-              إنشاء حساب
-            </button>
-          </Link>
+          ) : (
+            <>
+              <Link to="/login">
+                <button
+                  type="button"
+                  className="text-white bg-green-700 hover:bg-green-800 duration-300 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
+                >
+                  تسجيل الدخول
+                </button>
+              </Link>
+              <Link to="/signup">
+                <button
+                  type="button"
+                  className="bg-transparent hover:bg-green-700 text-green-700 font-semibold hover:text-white py-2 px-4 border border-green-500 hover:border-transparent rounded-lg text-sm text-center"
+                >
+                  إنشاء حساب
+                </button>
+              </Link>
+            </>
+          )}
           <button
             data-collapse-toggle="navbar-cta"
             type="button"

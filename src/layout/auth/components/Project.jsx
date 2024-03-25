@@ -7,11 +7,11 @@ const Register = () => {
     name_en: "",
     details_ar: "",
     details_en: "",
-    type_project: "",
+    project_type_id: "",
     completion_date: "",
     target_amount: "",
     remaining_amount: "",
-    project_image: null,
+    images: [null],
   });
 
   const handleInputChange = (event) => {
@@ -23,30 +23,36 @@ const Register = () => {
     const file = event.target.files[0];
     setFormData((prevFormData) => ({
       ...prevFormData,
-      project_image: file,
+      images: [...prevFormData.images, file],
     }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData();
-    for (const key in formData) {
-      if (key === "project_image") {
-        data.append(key, formData[key]);
-      } else {
-        data.append(key, formData[key]);
-      }
-    }
 
     try {
-      //change formData to data when api  is ready
-      await axios.post("http://localhost:3001/projects", formData, { 
-        /*headers: {
-          "Content-Type": "multipart/form-data",
-        },*/
-      });
+      const token = localStorage.getItem("token");
+      if (!token) {
+        throw new Error("Authentication token not found");
+      }
 
-      console.log("Project created successfully", formData);
+      const headers = {
+        Authorization: token,
+        "Content-Type": "multipart/form-data",
+      };
+
+      const data = new FormData();
+      for (const key in formData) {
+        data.append(key, formData[key]);
+      }
+
+      const response = await axios.post(
+        "https://donate-app-n7oe.onrender.com/api/v1/user/projects",
+        data,
+        { headers }
+      );
+
+      console.log("Project created successfully", response);
     } catch (error) {
       console.error("Error creating project:", error);
     }
@@ -188,7 +194,7 @@ const Register = () => {
                 صورة المشروع
               </label>
               <input
-                name="project_image"
+                name="images"
                 type="file"
                 onChange={handleFileChange}
                 className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
@@ -196,7 +202,7 @@ const Register = () => {
             </div>
             <button
               type="submit"
-              className="w-full bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  focus:ring-blue-800 text-white"
+              className="w-full bg-green-700 hover:bg-green-600  font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white"
             >
               إنشاء حساب
             </button>

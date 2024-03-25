@@ -1,134 +1,208 @@
 import axios from "axios";
+import { useState, useEffect } from "react";
+import Alert from "../../Alert";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate]);
+
+  const [alert, setAlert] = useState({});
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    password_confirmation: "",
+    terms: false,
+  });
+  const [submitDisabled, setSubmitDisabled] = useState(true);
+
+  const handleInputChange = (event) => {
+    const { name, value, type, checked } = event.target;
+    const inputValue = type === "checkbox" ? checked : value;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: inputValue,
+    }));
+  };
+
+  useEffect(() => {
+    const isAnyFieldEmpty = Object.values(formData).some(
+      (value) => value === "" || value === false
+    );
+    setSubmitDisabled(isAnyFieldEmpty);
+  }, [formData]);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const username = formData.get("username");
-    const email = formData.get("email");
-    const password = formData.get("password");
-    const confirmPassword = formData.get("confirmPassword");
 
-    if (password !== confirmPassword) {
-      console.error("Password and confirm password do not match");
+    const { password, password_confirmation } = formData;
+
+    if (password !== password_confirmation) {
+      setAlert({
+        message: "Password and confirm password do not match", 
+        type: "error" 
+      });
       return;
     }
 
     try {
-      await axios.post("http://localhost:3001/users", {
-        username,
-        email,
-        password,
+      const response = await axios.post(
+        "https://donate-app-n7oe.onrender.com/signup",
+        formData
+      );
+      const { token } = response.data;
+      localStorage.setItem("token", token); 
+      setAlert({ message: response.data.message, type: "success" });
+      
+      axios.interceptors.request.use((config) => {
+        config.headers["Authorization"] = `Bearer ${token}`;
+        return config;
       });
-
-      console.log("Registration successful");
+      
+      navigate("/");
     } catch (error) {
-      console.error("Error registering user:", error);
+      setAlert({ message: "Error registering user", type: "error" });
     }
   };
 
+  const handleCloseAlert = () => {
+    setAlert(null);
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 h-screen">
-        <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
-          <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <p className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-              إنشاء حساب جديد
-            </p>
-            <div>
-              <label
-                htmlFor="username"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                اسم المستخدم
-              </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                placeholder="محمد "
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                البريد الإلكتروني
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="text"
-                placeholder="example@example.com"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                كلمة المرور
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="confirmPassword"
-                className="block mb-2 text-sm font-medium text-gray-900"
-              >
-                تأكيد كلمة المرور
-              </label>
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
-              />
-            </div>
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
+    <>
+      {alert && (
+        <Alert
+          message={alert.message}
+          type={alert.type}
+          onClose={handleCloseAlert}
+        />
+      )}
+      <form onSubmit={handleSubmit}>
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 h-screen">
+          <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
+            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+              <p className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
+                إنشاء حساب جديد
+              </p>
+              <div>
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  اسم المستخدم
+                </label>
                 <input
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 bg-gray-700 border-gray-600 focus:ring-primary-600 ring-offset-gray-800"
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="محمد "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                  value={formData.name}
+                  onChange={handleInputChange}
                 />
               </div>
-              <div className="ml-3 text-sm">
+              <div>
                 <label
-                  htmlFor="terms"
-                  className="m-1 font-light text-gray-700 text-gray-300"
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-gray-900"
                 >
-                  أوافق على
-                  <a
-                    href="#"
-                    className="font-medium text-primary-600 hover:underline text-primary-500"
-                  >
-                    الشروط والأحكام
-                  </a>
+                  البريد الإلكتروني
                 </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="text"
+                  placeholder="example@example.com"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
               </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  كلمة المرور
+                </label>
+                <input
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="password_confirmation"
+                  className="block mb-2 text-sm font-medium text-gray-900"
+                >
+                  تأكيد كلمة المرور
+                </label>
+                <input
+                  id="password_confirmation"
+                  name="password_confirmation"
+                  type="password"
+                  placeholder="••••••••"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                  value={formData.password_confirmation}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div className="flex items-start">
+                <div className="flex items-center h-5">
+                  <input
+                    id="terms"
+                    name="terms"
+                    type="checkbox"
+                    className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 bg-gray-700 border-gray-
+                    300 focus:ring-primary-600 ring-offset-gray-800"
+                    checked={formData.terms}
+                    onChange={handleInputChange}
+                  />
+                </div>
+                <div className="ml-3 text-sm">
+                  <label
+                    htmlFor="terms"
+                    className="m-1 font-light text-gray-700 text-gray-300"
+                  >
+                    أوافق على
+                    <a
+                      href="#"
+                      className="font-medium text-primary-600 hover:underline text-primary-500"
+                    >
+                      الشروط والأحكام
+                    </a>
+                  </label>
+                </div>
+              </div>
+              <button
+                type="submit"
+                disabled={submitDisabled}
+                className={`w-full bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+                  submitDisabled
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "focus:ring-blue-800 text-white"
+                }`}
+              >
+                إنشاء حساب
+              </button>
             </div>
-            <button
-              type="submit"
-              className="w-full bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  focus:ring-blue-800 text-white"
-            >
-              إنشاء حساب
-            </button>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </>
   );
 };
 

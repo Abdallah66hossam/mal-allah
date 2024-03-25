@@ -71,7 +71,7 @@ const Banner = () => {
             </h1>
             <Link
               to={"/"}
-              className={`border text-[14px] font-bold py-[20px] px-[32px] rounded-[47px] duration-300 border-green-600 text-white bg-green-600 w-fit mx-auto mt-5 z-30 hover:bg-green-500 block`}
+              className={`border text-[18px]  py-[15px] px-[25px] rounded-[47px] duration-300 border-green-600 text-white bg-green-600 w-fit mx-auto mt-5 z-30 hover:bg-green-500 block`}
             >
               تبرع من هنا
             </Link>
