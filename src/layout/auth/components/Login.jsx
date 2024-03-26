@@ -1,11 +1,11 @@
+import { useEffect } from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Alert from "../../Alert";
+import { useAlert } from "../../context/AlertContext";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [alert, setAlert] = useState({});
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,40 +23,25 @@ const Login = () => {
     if (!email || !password) return;
 
     try {
-      const response = await axios.post("https://donate-app-n7oe.onrender.com/login", formData);
+      const response = await axios.post(
+        "https://donate-app-n7oe.onrender.com/login",
+        {
+          email,
+          password,
+        }
+      );
 
       const { token } = response.data.data;
-      console.log(token);
-      localStorage.setItem("token", token); 
-      setAlert({ message: response.data.message, type: "success" });
-
-      if(token){
-        axios.interceptors.request.use((config) => {
-          config.headers["Authorization"] = `${token}`;
-          return config;
-        });
-      }
-      
+      localStorage.setItem("token", token);
+      showAlert(response.data.message, "teal");
       navigate("/");
     } catch (error) {
-      setAlert({ message: "Error registering user", type: "error" });
+      showAlert(error.response.data.error, "red");
     }
   };
 
-  const handleCloseAlert = () => {
-    setAlert(null);
-  };
-
   return (
-    <>
-       {alert && (
-        <Alert
-          message={alert.message}
-          type={alert.type}
-          onClose={handleCloseAlert}
-        />
-      )}
-      <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="flex flex-col items-center justify-center h-screen px-6 py-8 mx-auto lg:py-0">
         <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -93,30 +78,6 @@ const Login = () => {
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
               />
             </div>
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="terms"
-                  name="terms"
-                  type="checkbox"
-                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 bg-gray-700 border-gray-600 focus:ring-primary-600 ring-offset-gray-800"
-                />
-              </div>
-              <div className="ml-3 text-sm">
-                <label
-                  htmlFor="terms"
-                  className="m-1 font-light text-gray-700 text-gray-300"
-                >
-                  أوافق على
-                  <a
-                    href="#"
-                    className="font-medium text-primary-600 hover:underline text-primary-500"
-                  >
-                    الشروط والأحكام
-                  </a>
-                </label>
-              </div>
-            </div>
             <button
               type="submit"
               className="w-full bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  focus:ring-blue-800 text-white"
@@ -130,8 +91,6 @@ const Login = () => {
         </div>
       </div>
     </form>
-    </>
-
   );
 };
 

@@ -1,10 +1,12 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import Alert from "../../Alert";
+
 import { useNavigate } from "react-router-dom";
+import { useAlert } from "../../context/AlertContext";
 
 const Register = () => {
   const navigate = useNavigate();
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -13,7 +15,6 @@ const Register = () => {
     }
   }, [navigate]);
 
-  const [alert, setAlert] = useState({});
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -45,10 +46,7 @@ const Register = () => {
     const { password, password_confirmation } = formData;
 
     if (password !== password_confirmation) {
-      setAlert({
-        message: "Password and confirm password do not match",
-        type: "error",
-      });
+      showAlert("Password and confirm password do not match", "red");
       return;
     }
 
@@ -59,7 +57,8 @@ const Register = () => {
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
-      setAlert({ message: response.data.message, type: "success" });
+
+      showAlert(response.data.message, "teal");
 
       axios.interceptors.request.use((config) => {
         config.headers["Authorization"] = `Bearer ${token}`;
@@ -68,26 +67,12 @@ const Register = () => {
 
       navigate("/");
     } catch (error) {
-      setAlert({
-        message: "Error registering user because " + error.response.data.error,
-        type: "error",
-      });
+      showAlert(error.response.data.error, "red");
     }
-  };
-
-  const handleCloseAlert = () => {
-    setAlert(null);
   };
 
   return (
     <>
-      {alert && (
-        <Alert
-          message={alert.message}
-          type={alert.type}
-          onClose={handleCloseAlert}
-        />
-      )}
       <form onSubmit={handleSubmit}>
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 h-screen">
           <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">

@@ -1,6 +1,8 @@
-import ReactDOM from "react-dom/client";
-import "./index.scss";
+// index.jsx
+import ReactDOM from "react-dom";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { AlertProvider } from "/src/layout/context/AlertContext.jsx"; // Import AlertProvider
+import "./index.scss";
 import HomePage from "./pages/HomePage.jsx";
 import RootLayout from "./layout/RootLayout.jsx";
 import Login from "./layout/auth/components/Login.jsx";
@@ -34,5 +36,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <AlertProvider> {/* Wrap the RouterProvider with AlertProvider */}
+    <RouterProvider router={router} />
+  </AlertProvider>
 );

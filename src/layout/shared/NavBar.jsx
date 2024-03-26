@@ -1,8 +1,11 @@
+import axios from "axios";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useAlert } from "../context/AlertContext";
 
 const NavBar = () => {
   let nav = useRef();
+  const { showAlert } = useAlert();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -25,6 +28,24 @@ const NavBar = () => {
     };
   }, []);
 
+  async function logout() {
+    const headers = {
+      Authorization: localStorage.getItem("token"),
+    };
+    try {
+      const response = await axios.delete(
+        "https://donate-app-n7oe.onrender.com/logout",
+        { headers }
+      );
+
+      localStorage.removeItem("token");
+      showAlert(response.data.message, "red");
+    } catch (error) {
+      showAlert("Error logging out", "red");
+      console.error("Error logging out:", error);
+    }
+  }
+
   const isLoggedIn = localStorage.getItem("token");
 
   return (
@@ -46,10 +67,7 @@ const NavBar = () => {
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-2">
           {isLoggedIn ? (
             <button
-              onClick={() => {
-                localStorage.removeItem("token");
-                window.location.reload(); 
-              }}
+              onClick={logout}
               type="button"
               className="text-white bg-red-700 hover:bg-red-800 duration-300 focus:outline-none font-medium rounded-lg text-sm px-4 py-2 text-center"
             >
@@ -128,6 +146,14 @@ const NavBar = () => {
                 className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
               >
                 المشاريع
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
+              >
+                <Link to="/create-project">انشاء مشروع</Link>
               </a>
             </li>
             <li>
