@@ -58,7 +58,7 @@ const Register = () => {
       const { token } = response.data;
       localStorage.setItem("token", token);
 
-      showAlert(response.data.message, "teal");
+      showAlert(response.data.message, response.data.success);
 
       axios.interceptors.request.use((config) => {
         config.headers["Authorization"] = `Bearer ${token}`;
@@ -178,10 +178,10 @@ const Register = () => {
               <button
                 type="submit"
                 disabled={submitDisabled}
-                className={`w-full bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+                className={`w-full text-white bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
                   submitDisabled
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "focus:ring-blue-800 text-white"
+                    ? "cursor-not-allowed"
+                    : ""
                 }`}
               >
                 إنشاء حساب

@@ -36,6 +36,9 @@ body {
   //height: 50000px;
   font-family: arabicFontMedium;
 }
+input, textarea{
+  outline: none;
+}
 ::selection {
   background: #16a34a;
   color: #fff;

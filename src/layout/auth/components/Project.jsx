@@ -2,17 +2,27 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAlert } from "../../context/AlertContext";
 import { useNavigate } from "react-router-dom";
+import { PhotoIcon } from "@heroicons/react/24/solid";
 
-const Register = () => {
+const Project = () => {
+  const url = "https://donate-app-n7oe.onrender.com";
   const navigate = useNavigate();
+  const [projectsTypes, setProjectsTypes] = useState([]);
 
   useEffect(() => {
+    axios
+      .get(url + "/api/v1/project_types?locale=ar")
+      .then((res) => setProjectsTypes(res.data.data))
+      .catch((error) => {
+        console.error("Error fetching countries:", error);
+      });
+
     const token = localStorage.getItem("token");
     if (!token) {
       navigate("/");
     }
 
-    axios.get()
+    axios.get();
   }, [navigate]);
 
   const { showAlert } = useAlert();
@@ -48,7 +58,7 @@ const Register = () => {
       const token = localStorage.getItem("token");
       if (!token) {
         showAlert("Authentication token not found", "red");
-        return
+        return;
       }
 
       const headers = {
@@ -62,12 +72,12 @@ const Register = () => {
       }
 
       const response = await axios.post(
-        "https://donate-app-n7oe.onrender.com/api/v1/user/projects?locale=ar",
+        url + "/api/v1/user/projects?locale=ar",
         data,
         { headers }
       );
 
-      showAlert(response.data.message, "teal");
+      showAlert(response.data.message, response.data.success);
       navigate("/");
     } catch (error) {
       showAlert(error.response.data.error, "red");
@@ -155,9 +165,11 @@ const Register = () => {
                 onChange={handleInputChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
               >
-                <option selected>نوعية المشروع</option>
-                <option value="1">بناء دار أيتام</option>
-                <option value="2">بناء مسجد</option>
+                {projectsTypes.map((project) => (
+                  <option key={project.id} value={project.id}>
+                    {project.name_i18n}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -205,22 +217,47 @@ const Register = () => {
               </div>
             </div>
 
-            <div>
-              <label className="block mb-2 text-sm font-medium text-gray-900">
+            <div className="col-span-full">
+              <label
+                htmlFor="cover-photo"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 صورة المشروع
               </label>
-              <input
-                name="images"
-                type="file"
-                onChange={handleFileChange}
-                className="flex h-10 w-full rounded-md border border-input bg-white px-3 py-2 text-sm text-gray-400 file:border-0 file:bg-transparent file:text-gray-600 file:text-sm file:font-medium"
-              />
+              <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-5">
+                <div className="text-center">
+                  <PhotoIcon
+                    className="mx-auto h-12 w-12 text-gray-300"
+                    aria-hidden="true"
+                  />
+                  <div className="mt-4 flex text-sm leading-6 text-gray-600">
+                    <label
+                      htmlFor="logo"
+                      className="relative cursor-pointer rounded-md bg-white font-semibold text-green-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-green-600 focus-within:ring-offset-2 hover:text-green-500"
+                    >
+                      <span>تحميل ملف</span>
+                      <input
+                        onChange={handleFileChange}
+                        id="logo"
+                        name="logo"
+                        type="file"
+                        className="sr-only"
+                      />
+                    </label>
+                    <p className="pl-1">أو السحب والإفلات</p>
+                  </div>
+                  <p className="text-xs leading-5 text-gray-600">
+                    PNG, JPG, PDF up to 5MB
+                  </p>
+                </div>
+              </div>
             </div>
+
             <button
               type="submit"
               className="w-full bg-green-700 hover:bg-green-600  font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white"
             >
-              إنشاء حساب
+              إنشاء مشروع
             </button>
           </div>
         </div>
@@ -229,4 +266,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Project;

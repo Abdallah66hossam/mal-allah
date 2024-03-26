@@ -8,6 +8,7 @@ import RootLayout from "./layout/RootLayout.jsx";
 import Login from "./layout/auth/components/Login.jsx";
 import Register from "./layout/auth/components/register.jsx";
 import Project from "./layout/auth/components/Project.jsx";
+import Charitable from "./layout/charitable.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/create-project",
         element: <Project />,
+      },
+      {
+        path: "/create-charitable",
+        element: <Charitable/>,
       },
     ],
   },

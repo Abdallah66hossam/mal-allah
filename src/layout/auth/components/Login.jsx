@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "../../context/AlertContext";
@@ -6,6 +6,7 @@ import { useAlert } from "../../context/AlertContext";
 const Login = () => {
   const navigate = useNavigate();
   const { showAlert } = useAlert();
+  const [submitDisabled, setSubmitDisabled] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,7 +21,10 @@ const Login = () => {
     const email = formData.get("email");
     const password = formData.get("password");
 
-    if (!email || !password) return;
+    if (!email || !password) {
+      showAlert("الرجاء إدخال البريد الإلكتروني وكلمة المرور", "red");
+      return;
+    }
 
     try {
       const response = await axios.post(
@@ -33,11 +37,16 @@ const Login = () => {
 
       const { token } = response.data.data;
       localStorage.setItem("token", token);
-      showAlert(response.data.message, "teal");
+      showAlert(response.data.message, response.data.success);
       navigate("/");
     } catch (error) {
       showAlert(error.response.data.error, "red");
     }
+  };
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setSubmitDisabled(value === "");
   };
 
   return (
@@ -61,6 +70,7 @@ const Login = () => {
                 type="text"
                 placeholder="JohnDoe@example.com"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                onChange={handleInputChange}
               />
             </div>
             <div>
@@ -76,11 +86,15 @@ const Login = () => {
                 type="password"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                onChange={handleInputChange}
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  focus:ring-blue-800 text-white"
+              disabled={submitDisabled}
+              className={`w-full text-white bg-green-700 hover:bg-green-600  font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
+                submitDisabled ? "cursor-not-allowed" : ""
+              }`}
             >
               تسجيل الدخول
             </button>

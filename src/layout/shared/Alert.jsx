@@ -1,4 +1,4 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 
 const Alert = ({ message, type, onClose }) => {
   useEffect(() => {
@@ -12,13 +12,13 @@ const Alert = ({ message, type, onClose }) => {
 
   return (
     <div
-      className={`fixed bottom-4 right-4 z-50 bg-${type}-100 border-t-4 border-${type}-500 rounded-b text-${type}-900 px-4 py-3 shadow-md`}
+      className={`fixed bottom-4  right-4 z-50 border-t-4 rounded-b ${type ? "text-teal-900 bg-teal-100 border-teal-500" : "text-red-900 bg-red-100 border-red-500"} px-4 py-3 shadow-md `}
       role="alert"
     >
       <div className="flex">
         <div className="py-1">
           <svg
-            className={`fill-current h-6 w-6 text-${type}-500 mr-4`}
+            className={`fill-current h-6 w-6 ${type ? "text-teal-500" : "text-red-500"} mr-4`}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
           >
