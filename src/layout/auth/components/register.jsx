@@ -46,8 +46,8 @@ const Register = () => {
 
     if (password !== password_confirmation) {
       setAlert({
-        message: "Password and confirm password do not match", 
-        type: "error" 
+        message: "Password and confirm password do not match",
+        type: "error",
       });
       return;
     }
@@ -58,17 +58,20 @@ const Register = () => {
         formData
       );
       const { token } = response.data;
-      localStorage.setItem("token", token); 
+      localStorage.setItem("token", token);
       setAlert({ message: response.data.message, type: "success" });
-      
+
       axios.interceptors.request.use((config) => {
         config.headers["Authorization"] = `Bearer ${token}`;
         return config;
       });
-      
+
       navigate("/");
     } catch (error) {
-      setAlert({ message: "Error registering user", type: "error" });
+      setAlert({
+        message: "Error registering user because " + error.response.data.error,
+        type: "error",
+      });
     }
   };
 
@@ -192,8 +195,8 @@ const Register = () => {
                 disabled={submitDisabled}
                 className={`w-full bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ${
                   submitDisabled
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "focus:ring-blue-800 text-white"
+                    ? "bg-gray-400 cursor-not-allowed text-white"
+                    : "focus:ring-green-800 text-white"
                 }`}
               >
                 إنشاء حساب
