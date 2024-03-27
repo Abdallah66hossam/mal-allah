@@ -9,6 +9,7 @@ import Login from "./layout/auth/components/Login.jsx";
 import Register from "./layout/auth/components/register.jsx";
 import Project from "./layout/auth/components/Project.jsx";
 import Charitable from "./layout/charitable.jsx";
+import { CharitableOrganizationsProvider } from "./layout/context/CharitableOrganizationsProvider.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        path:"/",
+        path: "/",
         element: <HomePage />,
       },
       {
@@ -34,14 +35,18 @@ const router = createBrowserRouter([
       },
       {
         path: "/create-charitable",
-        element: <Charitable/>,
+        element: <Charitable />,
       },
     ],
   },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <AlertProvider> {/* Wrap the RouterProvider with AlertProvider */}
-    <RouterProvider router={router} />
-  </AlertProvider>
+  <CharitableOrganizationsProvider>
+    <AlertProvider>
+      {" "}
+      {/* Wrap the RouterProvider with AlertProvider */}
+      <RouterProvider router={router} />
+    </AlertProvider>
+  </CharitableOrganizationsProvider>
 );

@@ -11,23 +11,35 @@ const RootLayout = () => {
 
   const hideNavbarFooterRoutes = ["/login", "/signup"];
   const hideCreateProjectRoutes = ["/create-project", "/charitable-details"];
-  const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(location.pathname);
-  const shouldHideCreateProject = !charitableOrganizations && hideCreateProjectRoutes.includes(location.pathname);
+  const shouldHideNavbarFooter = hideNavbarFooterRoutes.includes(
+    location.pathname
+  );
+  const shouldHideCreateProject =
+    !charitableOrganizations &&
+    hideCreateProjectRoutes.includes(location.pathname);
 
   // Redirect to home page if user doesn't have charity and is trying to access a restricted route
   useEffect(() => {
-    if (!charitableOrganizations && hideCreateProjectRoutes.includes(location.pathname)) {
-      navigate('/');
+    if (
+      !charitableOrganizations &&
+      hideCreateProjectRoutes.includes(location.pathname)
+    ) {
+      navigate("/");
     }
-  }, [charitableOrganizations, hideCreateProjectRoutes, location.pathname, navigate]);
+  }, [
+    charitableOrganizations,
+    hideCreateProjectRoutes,
+    location.pathname,
+    navigate,
+  ]);
 
   return (
     <main>
       {/* Conditionally render the NavBar */}
       {!shouldHideNavbarFooter && <NavBar />}
-    
+
       {!shouldHideCreateProject && <Outlet />}
-     
+
       {/* Conditionally render the Footer */}
       {!shouldHideNavbarFooter && <Footer />}
     </main>
