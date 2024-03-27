@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import apple from "../assets/images/apple-store.png";
-import google from "../assets/images/google-store.png";
-import Facebook from "../assets/images/Facebook.svg";
-import instgram from "../assets/images/instgram.svg";
+import apple from "../../assets/images/apple-store.png";
+import google from "../../assets/images/google-store.png";
+import Facebook from "../../assets/images/Facebook.svg";
+import instgram from "../../assets/images/instgram.svg";
 
 const Footer = () => {
   return (
