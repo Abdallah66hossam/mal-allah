@@ -7,7 +7,7 @@ import { useCharitableOrganizationsContext } from "../context/CharitableOrganiza
 const NavBar = () => {
   let nav = useRef();
   const { showAlert } = useAlert();
-  const { charitableOrganizations } = useCharitableOrganizationsContext(); // Get the charitable organizations context
+  const { charitableOrganizations } = useCharitableOrganizationsContext(); 
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
