@@ -23,7 +23,7 @@ const Banner = () => {
       <Swiper
         effect="fade"
         autoplay={{
-          delay: 5000,
+          delay: 10000,
           disableOnInteraction: false,
         }}
         pagination={pagination}
@@ -42,12 +42,14 @@ const Banner = () => {
             <h3
               className={`xl:text-[22px] leading-7 md:leading-[56px] -tracking-[0.44px] capitalize text-center opacity-80 mt-1 z-40`}
             >
-              title1
+              قال: قال رسول الله صلى الله عليه وسلم
             </h3>
             <h1
               className={`xl:text-[36px] lg:text-[35px] sm:text-[25px] text-[19px] leading-[30px] md:leading-[45px] font-semibold lg:leading-[56px] -tracking-[0.44px] self-stretch mb-[12px] sm:mb-[16px] xl:mb-[10px] capitalize text-center w-[80%] mx-auto  z-40`}
             >
-              description1
+              “حَصِّنُوا أَمْوَالَكُمْ بِالزَّكَاةِ، وَدَاوُوا مَرْضَاكُمْ
+              بِالصَّدَقَةِ، وَاسْتَقْبِلُوا أَمْوَاجَ الْبَلَاءِ بِالدُّعَاءِ
+              وَالتَّضَرُّعِ”
             </h1>
           </div>
         </SwiperSlide>
