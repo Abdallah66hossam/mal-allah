@@ -2,10 +2,12 @@ import axios from "axios";
 import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useAlert } from "../context/AlertContext";
+import { useCharitableOrganizationsContext } from "../context/CharitableOrganizationsProvider";
 
 const NavBar = () => {
   let nav = useRef();
   const { showAlert } = useAlert();
+  const { charitableOrganizations } = useCharitableOrganizationsContext(); // Get the charitable organizations context
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -55,7 +57,10 @@ const NavBar = () => {
           <div className="progress_bar" id="bar"></div>
         </div>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <Link to="/" className="flex items-center space-x-3 rtl:space-x-reverse">
+          <Link
+            to="/"
+            className="flex items-center space-x-3 rtl:space-x-reverse"
+          >
             <img
               src="/logo.jpg"
               className="h-[80px] object-contain rounded-xl absolute top-3"
@@ -146,14 +151,28 @@ const NavBar = () => {
                   المشاريع
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/create-project"
-                  className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
-                >
-                  انشاء مشروع
-                </Link>
-              </li>
+              {!charitableOrganizations && ( // Conditionally render if charitableOrganizations is false
+                <li>
+                  <Link
+                    to="/create-charitable"
+                    className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
+                  >
+                    انشاء الجهة الخيرية
+                  </Link>
+                </li>
+              )}
+
+              {charitableOrganizations && ( // Conditionally render if charitableOrganizations is true
+                <li>
+                  <Link
+                    to="/charitable-details"
+                    className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
+                  >
+                    معلومات الجهة الخيرية
+                  </Link>
+                </li>
+              )}
+
               <li>
                 <Link
                   to="/contact"
