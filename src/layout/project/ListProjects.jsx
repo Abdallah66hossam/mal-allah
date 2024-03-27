@@ -4,17 +4,25 @@ import ProjectCard from "./ProjectCard";
 
 const ListProjects = () => {
   const [projectsData, setProjectsData] = useState([]);
-  const url = "https://donate-app-n7oe.onrender.com"; // Assuming this is the correct URL
+  const url = "https://donate-app-n7oe.onrender.com";
   const token = localStorage.getItem("token");
+  const currentPath = window.location.pathname;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${url}/api/v1/user/projects?locale=ar`, {
+        let endpoint = `${url}/api/v1/user/projects?locale=ar`;
+        if (currentPath === "/charitable-details/list-projects") {
+          endpoint = `${url}/api/v1/user/projects?locale=ar`;
+        } else {
+          endpoint = `${url}/api/v1/projects?locale=ar`;
+        }
+        const response = await axios.get(endpoint, {
           headers: {
-            Authorization: ` ${token}`,
+            Authorization: token ? `${token}` : "",
           },
         });
+
         setProjectsData(response.data.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
@@ -22,13 +30,17 @@ const ListProjects = () => {
     };
 
     fetchData();
-  }, [url, token]);
+  }, [url, token, currentPath]);
 
   return (
     <div className="px-[7%]">
       <div className="flex justify-between mb-10 mt-20">
         <div className="flex items-center gap-4">
-          <img src="/src/assets/images" alt="statistics" className="relative top-1" />
+          <img
+            src="/public/Polygon.svg"
+            alt="statistics"
+            className="relative top-1"
+          />
           <h1 className="text-[34px] font-semibold">المشاريع:</h1>
         </div>
       </div>

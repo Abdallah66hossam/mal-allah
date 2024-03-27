@@ -7,12 +7,12 @@ import HomePage from "./pages/HomePage.jsx";
 import RootLayout from "./layout/RootLayout.jsx";
 import Login from "./layout/auth/components/Login.jsx";
 import Register from "./layout/auth/components/register.jsx";
-import CreateProject from "./layout/project/CreateProject.jsx"
-import ListProjects from "./layout/project/ListProjects.jsx"
+import CreateProject from "./layout/project/CreateProject.jsx";
+import ListProjects from "./layout/project/ListProjects.jsx";
 import { CharitableOrganizationsProvider } from "./layout/context/CharitableOrganizationsProvider.jsx";
-import CharitableDetails from "./layout/charitable/CharitableDetails.jsx"
-import CreateCharitable from "./layout/charitable/CreateCharitable.jsx"
-
+import CharitableDetails from "./layout/charitable/CharitableDetails.jsx";
+import CreateCharitable from "./layout/charitable/CreateCharitable.jsx";
+import Donate from "./layout/project/donate.jsx";
 const router = createBrowserRouter([
   {
     path: "/", // Define the root path
@@ -42,17 +42,22 @@ const router = createBrowserRouter([
       {
         path: "/charitable-details",
         element: <CharitableDetails />,
-       
       },
       {
         path: "/charitable-details/list-projects",
         element: <ListProjects />,
-       
+      },
+      {
+        path: "/list-projects",
+        element: <ListProjects />,
+      },
+      {
+        path: "/donate",
+        element: <Donate />,
       },
     ],
   },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <CharitableOrganizationsProvider>
