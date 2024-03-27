@@ -7,18 +7,20 @@ import HomePage from "./pages/HomePage.jsx";
 import RootLayout from "./layout/RootLayout.jsx";
 import Login from "./layout/auth/components/Login.jsx";
 import Register from "./layout/auth/components/register.jsx";
-import Project from "./layout/auth/components/Project.jsx";
-import Charitable from "./layout/charitable.jsx";
+import CreateProject from "./layout/project/CreateProject.jsx"
+import ListProjects from "./layout/project/ListProjects.jsx"
 import { CharitableOrganizationsProvider } from "./layout/context/CharitableOrganizationsProvider.jsx";
+import CharitableDetails from "./layout/charitable/CharitableDetails.jsx"
+import CreateCharitable from "./layout/charitable/CreateCharitable.jsx"
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", // Define the root path
     element: <RootLayout />,
     children: [
       {
         index: true,
-        path: "/",
+        path: "/", // Define the root path
         element: <HomePage />,
       },
       {
@@ -31,15 +33,26 @@ const router = createBrowserRouter([
       },
       {
         path: "/create-project",
-        element: <Project />,
+        element: <CreateProject />,
       },
       {
         path: "/create-charitable",
-        element: <Charitable />,
+        element: <CreateCharitable />,
+      },
+      {
+        path: "/charitable-details",
+        element: <CharitableDetails />,
+       
+      },
+      {
+        path: "/charitable-details/list-projects",
+        element: <ListProjects />,
+       
       },
     ],
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <CharitableOrganizationsProvider>
