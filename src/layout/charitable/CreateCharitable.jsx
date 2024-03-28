@@ -422,7 +422,7 @@ const CreateCharitableContainer = () => {
                       <p className="pl-1">أو السحب والإفلات</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">
-                      PNG, JPG, PDF up to 5MB
+                    PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
                     </p>
                   </div>
                 </div>
@@ -458,7 +458,7 @@ const CreateCharitableContainer = () => {
                       <p className="pl-1">أو السحب والإفلات</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">
-                      PNG, JPG, PDF up to 5MB
+                    PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
                     </p>
                   </div>
                 </div>
@@ -494,7 +494,7 @@ const CreateCharitableContainer = () => {
                       <p className="pl-1">أو السحب والإفلات</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">
-                      PNG, JPG, PDF up to 5MB
+                    PNG، JPG، PDF بحجم يصل إلى 5 ميجابايتB
                     </p>
                   </div>
                 </div>

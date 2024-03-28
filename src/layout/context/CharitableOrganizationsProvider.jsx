@@ -18,11 +18,10 @@ export const CharitableOrganizationsProvider = ({ children }) => {
     axios
       .get(`${url}/api/v1/user/charitable_organizations?locale=ar`, {
         headers: {
-          Authorization: `${token}`, // Ensure the Authorization header is correctly formatted
+          Authorization: `${token}`, 
         },
       })
       .then((res) => {
-        // Assuming res.data.success contains the array of organizations
         setCharitableOrganizations(res.data.success);
       })
       .catch((error) => {

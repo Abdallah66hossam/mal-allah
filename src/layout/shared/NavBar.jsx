@@ -63,7 +63,7 @@ const NavBar = () => {
           >
             <img
               src="/logo.jpg"
-              className="h-[80px] object-contain rounded-xl absolute top-3"
+              className="h-[80px] object-contain rounded-full absolute top-3"
               alt="Flowbite Logo"
             />
           </Link>
@@ -145,7 +145,7 @@ const NavBar = () => {
               </li>
               <li>
                 <Link
-                  to="/projects"
+                  to="/list-projects"
                   className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
                 >
                   المشاريع
