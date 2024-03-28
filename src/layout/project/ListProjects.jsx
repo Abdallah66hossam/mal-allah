@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import ProjectCard from "./ProjectCard";
+import ProjectDisplay from "./ProjectDisplay";
+import { useLoadingContext } from "../context/LoadingContext";
 
 const ListProjects = () => {
+  const { setLoading } = useLoadingContext();
   const [projectsData, setProjectsData] = useState([]);
   const url = "https://donate-app-n7oe.onrender.com";
   const token = localStorage.getItem("token");
@@ -10,6 +12,7 @@ const ListProjects = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      
       try {
         let endpoint = `${url}/api/v1/user/projects?locale=ar`;
         if (currentPath === "/charitable-details/list-projects") {
@@ -26,11 +29,11 @@ const ListProjects = () => {
         setProjectsData(response.data.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
-      }
+      } 
     };
 
     fetchData();
-  }, [url, token, currentPath]);
+  }, [url, token, currentPath, setLoading]);
 
   return (
     <div className="px-[7%]">
@@ -46,7 +49,7 @@ const ListProjects = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projectsData.map((project) => (
-          <ProjectCard key={project.id} project={project} />
+          <ProjectDisplay key={project.id} project={project} />
         ))}
       </div>
     </div>

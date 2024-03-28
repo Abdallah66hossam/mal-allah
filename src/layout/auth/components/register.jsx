@@ -3,10 +3,12 @@ import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "../../context/AlertContext";
+import { useLoadingContext } from "../../context/LoadingContext";
 
 const Register = () => {
   const navigate = useNavigate();
   const { showAlert } = useAlert();
+  const { setLoading } = useLoadingContext();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -50,6 +52,7 @@ const Register = () => {
       return;
     }
 
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://donate-app-n7oe.onrender.com/signup",
@@ -68,6 +71,8 @@ const Register = () => {
       navigate("/");
     } catch (error) {
       showAlert(error.response.data.error, "red");
+    } finally {
+      setLoading(false);
     }
   };
 

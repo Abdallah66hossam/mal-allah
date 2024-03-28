@@ -1,13 +1,16 @@
 import axios from "axios";
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "../context/AlertContext";
 import { useCharitableOrganizationsContext } from "../context/CharitableOrganizationsProvider";
+import { useLoadingContext } from '../context/LoadingContext'
 
 const NavBar = () => {
+  const navigate = useNavigate();
   let nav = useRef();
   const { showAlert } = useAlert();
   const { charitableOrganizations } = useCharitableOrganizationsContext(); 
+  const { setLoading } = useLoadingContext();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -34,6 +37,8 @@ const NavBar = () => {
     const headers = {
       Authorization: localStorage.getItem("token"),
     };
+
+    setLoading(true);
     try {
       const response = await axios.delete(
         "https://donate-app-n7oe.onrender.com/logout",
@@ -41,10 +46,13 @@ const NavBar = () => {
       );
 
       localStorage.removeItem("token");
-      showAlert(response.data.message, "red");
+      showAlert(response.data.message);
+      navigate('/')
     } catch (error) {
-      showAlert("Error logging out", "red");
+      showAlert("Error logging out");
       console.error("Error logging out:", error);
+    }finally {
+      setLoading(false);
     }
   }
 
@@ -151,7 +159,18 @@ const NavBar = () => {
                   المشاريع
                 </Link>
               </li>
-              {!charitableOrganizations && ( // Conditionally render if charitableOrganizations is false
+              {charitableOrganizations && isLoggedIn && ( 
+                <li>
+                  <Link
+                    to="/charitable-details"
+                    className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
+                  >
+                    معلومات الجهة الخيرية
+                  </Link>
+                </li>
+              )}
+              
+              {!charitableOrganizations && isLoggedIn && ( 
                 <li>
                   <Link
                     to="/create-charitable"
@@ -162,16 +181,7 @@ const NavBar = () => {
                 </li>
               )}
 
-              {charitableOrganizations && ( // Conditionally render if charitableOrganizations is true
-                <li>
-                  <Link
-                    to="/charitable-details"
-                    className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
-                  >
-                    معلومات الجهة الخيرية
-                  </Link>
-                </li>
-              )}
+              
 
               <li>
                 <Link

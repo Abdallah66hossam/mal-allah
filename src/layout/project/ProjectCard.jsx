@@ -1,4 +1,5 @@
-const ProjectCard = ({ project = {} }) => {
+// eslint-disable-next-line react/prop-types
+const ProjectCard = ({ project = {}}) => {
   const {
     project_type,
     image_url,

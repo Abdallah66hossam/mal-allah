@@ -14,6 +14,7 @@ import CharitableDetails from "./layout/charitable/CharitableDetails.jsx";
 import CreateCharitable from "./layout/charitable/CreateCharitable.jsx";
 import Donate from "./layout/project/donate.jsx";
 import Contact from "./layout/components/contact.jsx";
+import { LoadingProvider } from "./layout/context/LoadingContext.jsx";
 const router = createBrowserRouter([
   {
     path: "/", // Define the root path
@@ -66,10 +67,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <CharitableOrganizationsProvider>
-    <AlertProvider>
-      {" "}
-      {/* Wrap the RouterProvider with AlertProvider */}
-      <RouterProvider router={router} />
-    </AlertProvider>
+    <LoadingProvider>
+      <AlertProvider>
+        <RouterProvider router={router} />
+      </AlertProvider>
+    </LoadingProvider>
   </CharitableOrganizationsProvider>
 );
