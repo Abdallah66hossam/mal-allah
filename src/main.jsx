@@ -13,6 +13,7 @@ import { CharitableOrganizationsProvider } from "./layout/context/CharitableOrga
 import CharitableDetails from "./layout/charitable/CharitableDetails.jsx";
 import CreateCharitable from "./layout/charitable/CreateCharitable.jsx";
 import Donate from "./layout/project/donate.jsx";
+import Contact from "./layout/components/contact.jsx";
 const router = createBrowserRouter([
   {
     path: "/", // Define the root path
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: "/donate",
         element: <Donate />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },
