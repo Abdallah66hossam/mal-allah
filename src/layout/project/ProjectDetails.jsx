@@ -13,6 +13,9 @@ const ProjectDetails = () => {
   const url = "https://donate-app-n7oe.onrender.com";
 
   useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
+  useEffect(() => {
     setLoading(true);
     const fetchData = async () => {
       try {
@@ -30,7 +33,7 @@ const ProjectDetails = () => {
     <section className="product-container">
       <div className="img-card">
         <img
-          src={projectsData?.image_attributes?.[0]?.url}
+          src={projectsData?.image_url}
           alt="project picture"
           id="featured-image"
         />
@@ -54,7 +57,7 @@ const ProjectDetails = () => {
       </div>
       <div className="product-info">
         <h3>{projectsData?.project_type?.name_ar}</h3>
-        <p>{projectsData?.details_ar}</p> 
+        <p>{projectsData?.details_ar}</p>
 
         <div className="quantity flex mt-10">
           <input

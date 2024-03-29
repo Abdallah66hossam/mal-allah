@@ -27,7 +27,7 @@ const Banner = () => {
           disableOnInteraction: false,
         }}
         pagination={pagination}
-        className={`swipe h-[600px]`}
+        className={`swipe h-[600px] ibm-plex`}
         modules={[Pagination, Autoplay]}
         dir={"rtl"}
       >
@@ -67,16 +67,10 @@ const Banner = () => {
               {` ”قال رسول الله صلى الله عليه وسلم: “أنا وكافل اليتيم في الجنة هكذا” وأشار بالسبابة والوسطى`}
             </h3>
             <h1
-              className={`xl:text-[36px] lg:text-[35px] sm:text-[25px] text-[19px] leading-[30px] md:leading-[45px] font-semibold lg:leading-[60px] -tracking-[0.44px] self-stretch mb-[12px] sm:mb-[16px] xl:mb-[10px] capitalize text-center mx-auto z-10 lg:w-[70%] text-neutral-100`}
+              className={`xl:text-[30px] lg:text-[27px] sm:text-[25px] text-[19px] leading-[30px] md:leading-[45px] font-semibold lg:leading-[60px] -tracking-[0.44px] self-stretch mb-[12px] sm:mb-[16px] xl:mb-[10px] capitalize text-center mx-auto z-10 lg:w-[70%] text-neutral-100`}
             >
               {`"وَآتُوا الْيَتَامَى أَمْوَالَهُمْ وَلاَ تَتَبَدَّلُوا الْخَبِيثَ بِالطَّيِّبِ وَلاَ تَأْكُلُوا أَمْوَالَهُمْ إِلَى أَمْوَالِكُمْ إِنَّهُ كَانَ حُوبًا كَبِيرًا"`}
             </h1>
-            <Link
-              to={"/"}
-              className={`border text-[18px]  py-[15px] px-[25px] rounded-[47px] duration-300 border-green-600 text-white bg-green-600 w-fit mx-auto mt-5 z-30 hover:bg-green-500 block`}
-            >
-              تبرع من هنا
-            </Link>
           </div>
         </SwiperSlide>
         <SwiperSlide
@@ -90,19 +84,14 @@ const Banner = () => {
             <h3
               className={`xl:text-[22px] leading-7 md:leading-[56px] -tracking-[0.44px] capitalize text-center opacity-80 mt-1 z-40`}
             >
-              عن أبي هريرة -رضي الله عنه- قال:
+              قال رسول الله صلي الله عليه وسلم
             </h3>
             <h1
               className={`xl:text-[24px] lg:text-[35px] sm:text-[25px] text-[19px] leading-[30px] md:leading-[45px] font-semibold lg:leading-[43px] -tracking-[0.44px] self-stretch mb-[12px] sm:mb-[16px] xl:mb-[10px] capitalize text-center w-[80%] mx-auto  z-40`}
             >
-              (أنَّ أعْرَابِيًّا أتَى النبيَّ -صَلَّى اللهُ عليه وسلَّمَ-،
-              فَقالَ: دُلَّنِي علَى عَمَلٍ إذَا عَمِلْتُهُ دَخَلْتُ الجَنَّةَ،
-              قالَ: تَعْبُدُ اللهَ لا تُشْرِكُ به شيئاً، وتُقِيمُ الصَّلَاةَ
-              المَكْتُوبَةَ، وتُؤَدِّي الزَّكَاةَ المَفْرُوضَةَ، وتَصُومُ
-              رَمَضَانَ، قالَ: والذي نَفْسِي بيَدِهِ لا أزِيدُ علَى هذا،
-              فَلَمَّا ولَّى، قالَ النبيُّ -صَلَّى اللهُ عليه وسلَّمَ-: مَن
-              سَرَّهُ أنْ يَنْظُرَ إلى رَجُلٍ مِن أهْلِ الجَنَّةِ، فَلْيَنْظُرْ
-              إلى هذا)
+              “صنائعُ المعروفِ تقي مصارعَ السوءِ والآفاتِ والهلكاتِ، وأهلُ
+              المعروفِ في الدنيا همْ أهلُ المعروفِ في الآخرةِ”، مشيراً إلى أن
+              الصدقة تحمي صاحبها من المصائب.
             </h1>
           </div>
         </SwiperSlide>

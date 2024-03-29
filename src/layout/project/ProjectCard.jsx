@@ -15,7 +15,7 @@ const ProjectCard = ({ project = {} }) => {
   return (
     <Link
       to={`/project-detail/${id}`}
-      className="w-[300px] pb-4 shadow-xl rounded-[20px] cursor-pointer"
+      className="w-[400px] h-[420px] pb-6 shadow-xl rounded-[20px] cursor-pointer relative"
     >
       <img src={image_url} alt="png" className="w-full rounded-t-[20px]" />
       <div className="px-4 mt-1">
@@ -24,7 +24,7 @@ const ProjectCard = ({ project = {} }) => {
         <div className="flex items-center gap-[5px] mt-3">
           <img
             src={charitable_organization?.logo_url}
-            className="h-[40px] w-[40px] object-cover"
+            className="h-[40px] w-[40px] object-cover rounded-full"
           />
           <div>
             <h3 className="text-base font-medium leading-normal text-[#004D1F]">
@@ -35,7 +35,7 @@ const ProjectCard = ({ project = {} }) => {
             </span>
           </div>
         </div>
-        <div className="flex justify-between mt-2">
+        <div className="flex justify-between mt-2 absolute left-[20px] right-[20px] bottom-4">
           <div>
             <span className="font-bold leading-[12px] text-[18px] text-[#001A0A]">
               التبرعات:

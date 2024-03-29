@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useNavigate, useParams  } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAlert } from "../context/AlertContext";
 import axios from "axios";
 import { useLoadingContext } from "../context/LoadingContext";
@@ -15,7 +15,9 @@ const DonationForm = () => {
     amount: localStorage.getItem("donate_value"),
     project_id: id,
   });
-  
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, []);
   const url = "https://donate-app-n7oe.onrender.com";
   const navigate = useNavigate();
   const { showAlert } = useAlert();

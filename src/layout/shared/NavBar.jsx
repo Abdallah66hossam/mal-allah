@@ -71,7 +71,7 @@ const NavBar = () => {
           >
             <img
               src="/logo.jpg"
-              className="h-[80px] object-contain rounded-full absolute top-3"
+              className="h-[120px] object-contain rounded-[10px] absolute top-3"
               alt="Flowbite Logo"
             />
           </Link>
@@ -133,7 +133,7 @@ const NavBar = () => {
             className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 py-5"
             id="navbar-cta"
           >
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
+            <ul className="flex flex-col font-medium md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white">
               <li>
                 <Link
                   to="/"

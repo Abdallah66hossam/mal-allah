@@ -36,8 +36,8 @@ const ListProjects = () => {
   }, [url, token, currentPath, setLoading]);
 
   return (
-    <div className="px-[7%]">
-      <div className="flex justify-between mb-10 mt-20">
+    <div className="px-[7%] mb-32">
+      <div className="flex gap-5 flex-wrap items-center mb-10 mt-20">
         <div className="flex items-center gap-4">
           <img
             src="./Polygon.svg"

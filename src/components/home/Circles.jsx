@@ -1,13 +1,62 @@
-import { circleData } from "./circleData";
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Circles = () => {
   const [counterOn, setCounterOn] = useState(false);
+  const [StatisticsData, setStatisticsData] = useState([]);
+  console.log(StatisticsData);
+  const url = "https://donate-app-n7oe.onrender.com";
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${url}/api/v1/reports/statistics_donations`
+        );
+        setStatisticsData(response.data.data);
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  let circleData = [
+    {
+      number: StatisticsData?.count_donations,
+      title: "اجمالي التبرعات",
+      icon: "/user_5_fill.svg",
+      circle: "/Ellipse1.svg",
+      number_color: "text-[#FF4119]",
+    },
+    {
+      number: StatisticsData?.country_receive,
+      title: "البلاد المستفادة",
+      icon: "/svg3.svg",
+      circle: "/Ellipse3.svg",
+      number_color: "text-[#4678D2]",
+    },
+    {
+      number: StatisticsData?.count_charitable,
+      title: "المؤسسات",
+      icon: "/svg4.svg",
+      circle: "/Ellipse4.svg",
+      number_color: "text-[#7A7986]",
+    },
+    {
+      number: StatisticsData?.count_projects,
+      title: "المشاريع",
+      icon: "/svg5.svg",
+      circle: "/Ellipse5.svg",
+      number_color: "text-[#B73853]",
+    },
+  ];
+
   return (
     <ScrollTrigger
-      className="flex justify-center gap-5 items-center flex-wrap mt-32"
+      className="flex justify-center gap-5 items-center flex-wrap mb-32 mt-40"
       onEnter={() => setCounterOn(true)}
       onExit={() => setCounterOn(false)}
     >
@@ -21,14 +70,14 @@ const Circles = () => {
             />
           </div>
           <div className="relative">
-            <img src={circle} />
+            <img src={circle} className="h-[200px]" />
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center mt-1">
               <h3 className={`font-bold text-[28px]`}>
                 {counterOn && (
                   <CountUp
                     start={0}
                     end={number}
-                    duration={1}
+                    duration={3}
                     delay={0}
                     className={number_color}
                   />
