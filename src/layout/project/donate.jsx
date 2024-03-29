@@ -53,10 +53,10 @@ const DonationForm = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex flex-col justify-around bg-gray-800 p-4 border border-white border-opacity-30 rounded-lg shadow-md max-w-xs mx-auto">
+      <div className="flex flex-col justify-around bg-gray-700 p-4 border border-white border-opacity-30 rounded-lg shadow-md mx-auto w-[90%] lg:w-[70%] my-[100px]">
         <div className="flex flex-row items-center justify-between mb-3">
           <input
-            className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2 mb-3 flex-grow"
+            className="w-full h-10 border-none outline-none text-sm bg-gray-700 text-white font-semibold caret-orange-500 pl-2 mb-3 flex-grow"
             type="text"
             name="donate_name"
             id="donate_name"
@@ -64,7 +64,7 @@ const DonationForm = () => {
             value={formData.donate_name}
             onChange={handleInputChange}
           />
-          <div className="flex items-center justify-center relative w-14 h-9 bg-gray-800 border border-white border-opacity-20 rounded-md">
+          <div className="flex items-center justify-center relative w-14 h-9 bg-gray-700 border border-white border-opacity-20 rounded-md">
             <svg
               className="text-white fill-current"
               xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +86,7 @@ const DonationForm = () => {
               ></path>
             </svg>
           </div>
-          <div className="flex mr-3 items-center justify-center relative w-14 h-9 bg-gray-800 border border-white border-opacity-20 rounded-md">
+          <div className="flex mr-3 items-center justify-center relative w-14 h-9 bg-gray-700 border border-white border-opacity-20 rounded-md">
             <svg
               viewBox="0 0 256 83"
               height="83"
@@ -114,7 +114,7 @@ const DonationForm = () => {
           </div>
         </div>
         <input
-          className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+          className="w-full h-10 border-none outline-none text-sm bg-gray-700 text-white font-semibold caret-orange-500 pl-2"
           type="text"
           name="card_number"
           id="card_number"
@@ -124,7 +124,7 @@ const DonationForm = () => {
         />
         <div className="flex flex-row justify-between">
           <input
-            className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+            className="w-full h-10 border-none outline-none text-sm bg-gray-700 text-white font-semibold caret-orange-500 pl-2"
             type="text"
             name="issue_date"
             id="issue_date"
@@ -133,7 +133,7 @@ const DonationForm = () => {
             onChange={handleInputChange}
           />
           <input
-            className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+            className="w-full h-10 border-none outline-none text-sm bg-gray-700 text-white font-semibold caret-orange-500 pl-2"
             type="text"
             name="cvv"
             id="cvv"
@@ -143,7 +143,7 @@ const DonationForm = () => {
           />
         </div>
         <input
-          className="w-full h-10 border-none outline-none text-sm bg-gray-800 text-white font-semibold caret-orange-500 pl-2"
+          className="w-full h-10 border-none outline-none text-sm bg-gray-700 text-white font-semibold caret-orange-500 pl-2"
           type="text"
           name="amount"
           id="amount"
