@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { useAlert } from "../context/AlertContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useLoadingContext } from "../context/LoadingContext";
 
 const CreateCharitableContainer = () => {
   const url = "https://donate-app-n7oe.onrender.com";
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
+  const { setLoading } = useLoadingContext();
 
   useEffect(() => {
     axios
@@ -86,6 +88,7 @@ const CreateCharitableContainer = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -113,6 +116,8 @@ const CreateCharitableContainer = () => {
       navigate("/");
     } catch (error) {
       showAlert(error.response.data.error, "red");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -313,7 +318,7 @@ const CreateCharitableContainer = () => {
                     onChange={handleInputChange}
                     value={formData.country_id}
                     id="country"
-                    name="country_id" 
+                    name="country_id"
                     autoComplete="country-name"
                     className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:max-w-xs sm:text-sm sm:leading-6"
                   >
@@ -371,7 +376,7 @@ const CreateCharitableContainer = () => {
                   htmlFor="postalCode"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  الرمز البريدي 
+                  الرمز البريدي
                 </label>
                 <div className="mt-2">
                   <input
@@ -422,7 +427,7 @@ const CreateCharitableContainer = () => {
                       <p className="pl-1">أو السحب والإفلات</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">
-                    PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
+                      PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
                     </p>
                   </div>
                 </div>
@@ -458,7 +463,7 @@ const CreateCharitableContainer = () => {
                       <p className="pl-1">أو السحب والإفلات</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">
-                    PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
+                      PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
                     </p>
                   </div>
                 </div>
@@ -494,7 +499,7 @@ const CreateCharitableContainer = () => {
                       <p className="pl-1">أو السحب والإفلات</p>
                     </div>
                     <p className="text-xs leading-5 text-gray-600">
-                    PNG، JPG، PDF بحجم يصل إلى 5 ميجابايتB
+                      PNG، JPG، PDF بحجم يصل إلى 5 ميجابايتB
                     </p>
                   </div>
                 </div>
@@ -507,7 +512,6 @@ const CreateCharitableContainer = () => {
                 >
                   الجوائز والمكافآت
                 </label>
-                
               </div>
             </div>
           </div>

@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import { useAlert } from "../context/AlertContext";
 import { useNavigate } from "react-router-dom";
 import { PhotoIcon } from "@heroicons/react/24/solid";
+import { useLoadingContext } from "../context/LoadingContext";
 
 const Project = () => {
   const url = "https://donate-app-n7oe.onrender.com";
   const navigate = useNavigate();
   const [projectsTypes, setProjectsTypes] = useState([]);
+  const { setLoading } = useLoadingContext();
 
   useEffect(() => {
     axios
@@ -71,6 +73,7 @@ const Project = () => {
         data.append(key, formData[key]);
       }
 
+      setLoading(true);
       const response = await axios.post(
         url + "/api/v1/user/projects?locale=ar",
         data,
@@ -81,6 +84,8 @@ const Project = () => {
       navigate("/");
     } catch (error) {
       showAlert(error.response.data.error, "red");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -278,7 +283,7 @@ const Project = () => {
                         <p className="pl-1">أو السحب والإفلات</p>
                       </div>
                       <p className="text-xs leading-5 text-gray-600">
-                      PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
+                        PNG، JPG، PDF بحجم يصل إلى 5 ميجابايت
                       </p>
                     </div>
                   </div>

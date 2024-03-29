@@ -2,11 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "../../context/AlertContext";
+import { useLoadingContext } from "../../context/LoadingContext";
 
 const Login = () => {
   const navigate = useNavigate();
   const { showAlert } = useAlert();
   const [submitDisabled, setSubmitDisabled] = useState(true);
+  const { setLoading } = useLoadingContext();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,6 +28,7 @@ const Login = () => {
       return;
     }
 
+    setLoading(true);
     try {
       const response = await axios.post(
         "https://donate-app-n7oe.onrender.com/login",
@@ -41,6 +44,8 @@ const Login = () => {
       navigate("/");
     } catch (error) {
       showAlert(error.response.data.error, "red");
+    }finally {
+      setLoading(false);
     }
   };
 

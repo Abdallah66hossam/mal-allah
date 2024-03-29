@@ -27,7 +27,7 @@ export const CharitableOrganizationsProvider = ({ children }) => {
       .catch((error) => {
         console.error("Error fetching charitable organizations:", error);
       });
-  }, [token, url]);
+  }, [token, url, charitableOrganizations]);
 
   return (
     <CharitableOrganizationsContext.Provider
