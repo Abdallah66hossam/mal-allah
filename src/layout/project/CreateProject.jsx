@@ -38,7 +38,7 @@ const Project = () => {
     completion_date: "",
     target_amount: "",
     remaining_amount: "",
-    images: "",
+    image: "",
   });
 
   const handleInputChange = (event) => {
@@ -51,7 +51,7 @@ const Project = () => {
     const file = event.target.files[0];
     setFormData((prevFormData) => ({
       ...prevFormData,
-      images: [file],
+      image: file,
     }));
   };
 
@@ -193,6 +193,9 @@ const Project = () => {
                       autoComplete="project_type_id"
                       className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:max-w-xs sm:text-sm sm:leading-6"
                     >
+                    <option>
+                      اختر نوع المشروع
+                    </option>
                       {projectsTypes.map((project) => (
                         <option key={project.id} value={project.id}>
                           {project.name_i18n}

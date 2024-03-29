@@ -185,21 +185,21 @@ const CreateCharitableContainer = () => {
                 </div>
               </div>
 
-              <div className="sm:col-span-full">
+              <div className="col-span-full">
                 <label
                   htmlFor="board_of_directors"
                   className="block text-sm font-medium leading-6 text-gray-900"
                 >
-                  مجلس إدارة
+                مجلس إدارة
+
                 </label>
                 <div className="mt-2">
-                  <input
+                  <textarea
                     onChange={handleInputChange}
                     value={formData.board_of_directors}
                     id="board_of_directors"
                     name="board_of_directors"
-                    type="text"
-                    autoComplete="board_of_directors"
+                    rows={3}
                     className="px-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-green-600 sm:text-sm sm:leading-6"
                   />
                 </div>
