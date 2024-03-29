@@ -32,7 +32,7 @@ const Circles = () => {
       number_color: "text-[#FF4119]",
     },
     {
-      number: StatisticsData?.country_receive,
+      number: 1,
       title: "البلاد المستفادة",
       icon: "/svg3.svg",
       circle: "/Ellipse3.svg",
@@ -77,7 +77,7 @@ const Circles = () => {
                   <CountUp
                     start={0}
                     end={number}
-                    duration={3}
+                    duration={5}
                     delay={0}
                     className={number_color}
                   />

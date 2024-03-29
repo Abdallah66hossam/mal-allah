@@ -12,6 +12,7 @@ const ListProjects = () => {
   const currentPath = window.location.pathname;
 
   useEffect(() => {
+    setLoading(true);
     const fetchData = async () => {
       try {
         let endpoint = `${url}/api/v1/user/projects?locale=ar`;
@@ -27,6 +28,7 @@ const ListProjects = () => {
         });
 
         setProjectsData(response.data.data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }

@@ -8,7 +8,7 @@ const DonationForm = () => {
   const { setLoading } = useLoadingContext();
   const { id } = useParams();
   const [formData, setFormData] = useState({
-    donate_name: "",
+    donate_name: "Abdallah Hossam",
     card_number: "",
     issue_date: "",
     cvv: "",
