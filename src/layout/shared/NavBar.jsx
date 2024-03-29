@@ -3,13 +3,13 @@ import { useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAlert } from "../context/AlertContext";
 import { useCharitableOrganizationsContext } from "../context/CharitableOrganizationsProvider";
-import { useLoadingContext } from '../context/LoadingContext'
+import { useLoadingContext } from "../context/LoadingContext";
 
 const NavBar = () => {
   const navigate = useNavigate();
   let nav = useRef();
   const { showAlert } = useAlert();
-  const { charitableOrganizations } = useCharitableOrganizationsContext(); 
+  const { charitableOrganizations } = useCharitableOrganizationsContext();
   const { setLoading } = useLoadingContext();
 
   useEffect(() => {
@@ -47,11 +47,11 @@ const NavBar = () => {
 
       localStorage.removeItem("token");
       showAlert(response.data.message);
-      navigate('/')
+      navigate("/");
     } catch (error) {
       showAlert("Error logging out");
       console.error("Error logging out:", error);
-    }finally {
+    } finally {
       setLoading(false);
     }
   }
@@ -159,7 +159,15 @@ const NavBar = () => {
                   المشاريع
                 </Link>
               </li>
-              {charitableOrganizations && isLoggedIn && ( 
+              <li>
+                <Link
+                  to="/statistics-donations"
+                  className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
+                >
+                  الاحصائيات
+                </Link>
+              </li>
+              {charitableOrganizations && isLoggedIn && (
                 <li>
                   <Link
                     to="/charitable-details"
@@ -169,8 +177,8 @@ const NavBar = () => {
                   </Link>
                 </li>
               )}
-              
-              {!charitableOrganizations && isLoggedIn && ( 
+
+              {!charitableOrganizations && isLoggedIn && (
                 <li>
                   <Link
                     to="/create-charitable"
@@ -180,8 +188,6 @@ const NavBar = () => {
                   </Link>
                 </li>
               )}
-
-              
 
               <li>
                 <Link

@@ -1,5 +1,7 @@
+import { Link } from "react-router-dom";
+
 // eslint-disable-next-line react/prop-types
-const ProjectCard = ({ project = {}}) => {
+const ProjectCard = ({ project = {} }) => {
   const {
     project_type,
     image_url,
@@ -8,10 +10,13 @@ const ProjectCard = ({ project = {}}) => {
     charitable_organization,
     target_amount,
     remaining_amount,
+    id,
   } = project;
-  console.log(charitable_organization?.logo_url);
   return (
-    <div className="w-[300px] pb-4 shadow-xl rounded-[20px] cursor-pointer">
+    <Link
+      to={`/project-detail/${id}`}
+      className="w-[300px] pb-4 shadow-xl rounded-[20px] cursor-pointer"
+    >
       <img src={image_url} alt="png" className="w-full rounded-t-[20px]" />
       <div className="px-4 mt-1">
         <h2 className="text-[18px] font-medium text-[#007930]">{name_i18n}</h2>
@@ -49,7 +54,7 @@ const ProjectCard = ({ project = {}}) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
