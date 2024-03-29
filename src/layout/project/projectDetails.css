@@ -1,0 +1,122 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+.product-container {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: 40px;
+  padding: 50px 4%;
+}
+
+.img-card #featured-image {
+  width: 100%;
+  flex-shrink: 0;
+  border-radius: 14px;
+  height: 420px;
+  min-width: 100%;
+  object-fit: cover;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.sm-card {
+  border: 2px solid darkred;
+}
+
+.product-info {
+  width: 60%;
+}
+.product-info h3 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 130%;
+}
+
+.product-info h5 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 130%;
+  color: #ff4242;
+  margin: 6px 0;
+}
+
+.product-info del {
+  color: #a9a9a9;
+}
+
+.product-info p {
+  margin: 15px 0;
+  width: 70%;
+}
+
+.quantity input {
+  margin-bottom: 15px;
+  padding: 6px;
+}
+
+.donate {
+  background: #17696a;
+  border-radius: 4px;
+  padding: 10px 37px;
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+.charitable_organization {
+  color: #17696a;
+  font-size: 19px;
+}
+
+.donate:hover {
+  background: #ff4242;
+  transition: ease-in 0.4s;
+}
+
+.delivery {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  color: #787a80;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: 1px;
+}
+
+hr {
+  color: #787a80;
+  width: 58%;
+  opacity: 0.67;
+}
+
+@media screen and (max-width: 1024px) {
+  .product-container {
+    flex-direction: column;
+  }
+  .small-Card img {
+    width: 80px;
+  }
+  .product-info {
+    width: 100%;
+  }
+  .product-info p {
+    width: 100%;
+  }
+
+  .delivery {
+    width: 100%;
+  }
+
+  hr {
+    width: 100%;
+  }
+}

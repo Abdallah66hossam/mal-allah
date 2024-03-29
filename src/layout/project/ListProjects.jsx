@@ -12,7 +12,6 @@ const ListProjects = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      
       try {
         let endpoint = `${url}/api/v1/user/projects?locale=ar`;
         if (currentPath === "/charitable-details/list-projects") {
@@ -29,7 +28,7 @@ const ListProjects = () => {
         setProjectsData(response.data.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
-      } 
+      }
     };
 
     fetchData();
@@ -40,7 +39,7 @@ const ListProjects = () => {
       <div className="flex justify-between mb-10 mt-20">
         <div className="flex items-center gap-4">
           <img
-            src="/public/Polygon.svg"
+            src="./Polygon.svg"
             alt="statistics"
             className="relative top-1"
           />
