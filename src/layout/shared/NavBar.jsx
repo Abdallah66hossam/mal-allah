@@ -71,7 +71,7 @@ const NavBar = () => {
           >
             <img
               src="/logo.jpg"
-              className="h-[120px] object-contain rounded-[10px] absolute top-3"
+              className="h-[80px] object-contain rounded-[10px] absolute top-3"
               alt="Flowbite Logo"
             />
           </Link>

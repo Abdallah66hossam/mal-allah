@@ -15,7 +15,7 @@ const ProjectCard = ({ project = {} }) => {
   return (
     <Link
       to={`/project-detail/${id}`}
-      className="w-[400px] h-[420px] pb-6 shadow-xl rounded-[20px] cursor-pointer relative"
+      className="w-[300] h-[380px] pb-6 shadow-xl rounded-[20px] cursor-pointer relative"
     >
       <img src={image_url} alt="png" className="w-full rounded-t-[20px]" />
       <div className="px-4 mt-1">
