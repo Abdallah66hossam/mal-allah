@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import ProjectDisplay from "./ProjectDisplay";
 import { useLoadingContext } from "../context/LoadingContext";
+import ProjectCard from "./ProjectCard";
 
 const ListProjects = () => {
   const { setLoading } = useLoadingContext();
@@ -48,7 +49,7 @@ const ListProjects = () => {
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projectsData.map((project) => (
-          <ProjectDisplay key={project.id} project={project} />
+          <ProjectCard key={project.id} project={project} />
         ))}
       </div>
     </div>

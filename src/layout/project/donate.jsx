@@ -1,19 +1,21 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams  } from "react-router-dom";
 import { useAlert } from "../context/AlertContext";
 import axios from "axios";
 import { useLoadingContext } from "../context/LoadingContext";
 
 const DonationForm = () => {
   const { setLoading } = useLoadingContext();
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     donate_name: "",
     card_number: "",
     issue_date: "",
     cvv: "",
-    amount: "",
-    project_id: 1,
+    amount: localStorage.getItem("donate_value"),
+    project_id: id,
   });
+  
   const url = "https://donate-app-n7oe.onrender.com";
   const navigate = useNavigate();
   const { showAlert } = useAlert();

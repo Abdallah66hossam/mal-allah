@@ -4,7 +4,7 @@ import ProjectCard from './ProjectCard';
 const ProjectDisplay = ({ project }) => {
   return (
     <div>
-      { !project ? (
+      { project ? (
         <div className="flex flex-col bg-neutral-300 w-56 h-64 animate-pulse rounded-xl p-4 gap-4">
           <div className="bg-neutral-400/50 w-full h-32 animate-pulse rounded-md"></div>
           <div className="flex flex-col gap-2">

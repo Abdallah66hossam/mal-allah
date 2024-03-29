@@ -54,7 +54,7 @@ const ProjectDetails = () => {
       </div>
       <div className="product-info">
         <h3>{projectsData?.project_type?.name_ar}</h3>
-        <p>{projectsData?.details_ar}</p>
+        <p>{projectsData?.details_ar}</p> 
 
         <div className="quantity flex mt-10">
           <input
