@@ -145,7 +145,7 @@ const NavBar = () => {
               </li>
               <li>
                 <Link
-                  to="/about"
+                  to="/about-us"
                   className="block py-2 px-3 text-green-700 arabicFontBold rounded hover:bg-gray-100 duration-300"
                 >
                   من نحن

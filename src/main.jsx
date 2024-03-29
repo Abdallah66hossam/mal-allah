@@ -18,6 +18,7 @@ import { LoadingProvider } from "./layout/context/LoadingContext.jsx";
 import ProjectDetails from "./layout/project/ProjectDetails.jsx";
 import Statistics from "./components/statistics/StatisticsTable.jsx";
 import StatisticsPage from "./pages/StatisticsPage.jsx";
+import AboutusPage from "./pages/AboutusPage.jsx";
 const router = createBrowserRouter([
   {
     path: "/", // Define the root path
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/charitable-details/list-projects",
         element: <ListProjects />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutusPage />,
       },
       {
         path: "/list-projects",
