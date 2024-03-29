@@ -17,6 +17,7 @@ import Contact from "./layout/components/contact.jsx";
 import { LoadingProvider } from "./layout/context/LoadingContext.jsx";
 import ProjectDetails from "./layout/project/ProjectDetails.jsx";
 import Statistics from "./components/statistics/StatisticsTable.jsx";
+import StatisticsPage from "./pages/StatisticsPage.jsx";
 const router = createBrowserRouter([
   {
     path: "/", // Define the root path
@@ -69,7 +70,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/statistics-donations",
-        element: <Statistics />,
+        element: <StatisticsPage />,
       },
     ],
   },

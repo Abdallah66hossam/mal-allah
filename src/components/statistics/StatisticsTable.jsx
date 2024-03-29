@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLoadingContext } from "../../layout/context/LoadingContext";
 import axios from "axios";
 
-const Statistics = () => {
+const StatisticsTable = () => {
   const { setLoading } = useLoadingContext();
   const [StatisticsData, setStatisticsData] = useState([]);
   const url = "https://donate-app-n7oe.onrender.com";
@@ -24,7 +24,7 @@ const Statistics = () => {
     fetchData();
   }, [setLoading]);
   return (
-    <div className="relative shadow-md sm:rounded-lg mt-6 rounded-lg overflow-x-auto ">
+    <div className="relative shadow-md sm:rounded-lg mt-6 rounded-lg overflow-x-auto mx-[7%] my-[120px]">
       <table
         className={`text-sm text-[#292D30] overflow-hidden w-[800px] md:w-full rounded-t-lg md:rounded-lg`}
       >
@@ -71,4 +71,4 @@ const Statistics = () => {
   );
 };
 
-export default Statistics;
+export default StatisticsTable;
